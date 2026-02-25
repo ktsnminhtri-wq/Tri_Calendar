@@ -12,7 +12,6 @@ def tao_hinh_nen_lich():
     # Canvas RGBA - Nền đen nhám
     W, H = 1170, 2532
     img = Image.new('RGBA', (W, H), color=(18, 18, 18, 255))
-    draw = ImageDraw.Draw(img)
 
     # Load Font
     try:
