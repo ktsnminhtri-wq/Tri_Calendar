@@ -41,9 +41,9 @@ def tao_hinh_nen_lich():
     COLOR_FUTURE_NORMAL = (44, 44, 46, 255) # Xám tối (Tương lai thường)
 
     # Đã set opacity là 25 theo đúng test của bạn
-    COLOR_DIM_RED = (255, 59, 48, 75)    # Đỏ tươi + Mờ
-    COLOR_DIM_GREEN = (52, 199, 89, 75)  # Xanh lá tươi + Mờ
-    COLOR_DIM_ORANGE = (255, 149, 0, 75) # Cam tươi + Mờ
+    COLOR_DIM_RED = (110, 0, 0, 255)    # Đỏ tươi + Mờ
+    COLOR_DIM_GREEN = (56, 96, 0, 255)  # Xanh lá tươi + Mờ
+    COLOR_DIM_ORANGE = (130, 100, 0, 255) # Cam tươi + Mờ
 
     def lay_mau_tuong_lai(ngay_dang_xet):
         for start, end in vung_do:
