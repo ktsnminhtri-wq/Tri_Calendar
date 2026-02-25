@@ -1,0 +1,38 @@
+name: Generate Jarvis Calendar
+
+on:
+  schedule:
+    # Máy chủ GitHub dùng giờ quốc tế (UTC). 
+    # Giờ Việt Nam (GMT+7) đi trước 7 tiếng.
+    # Để chạy lúc 00:01 sáng VN, ta trừ đi 7 tiếng -> 17:01 chiều hôm trước (UTC).
+    - cron: '1 17 * * *'
+  workflow_dispatch: # Tạo nút bấm để bạn có thể chạy test bằng tay bất cứ lúc nào
+
+permissions:
+  contents: write # Cấp quyền cho Bot được phép lưu file ảnh mới đè lên file cũ
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Cài đặt thư viện đồ họa Pillow
+        run: pip install Pillow
+
+      - name: Chạy Jarvis vẽ lịch
+        run: python ve_lich.py
+
+      - name: Lưu ảnh mới và đẩy lại lên kho chứa
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add jarvis_wallpaper.png
+          git commit -m "Cập nhật Lịch tự động [skip ci]" || exit 0
+          git push
