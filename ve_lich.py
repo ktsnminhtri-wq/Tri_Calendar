@@ -1,0 +1,98 @@
+import os
+import datetime
+import calendar
+from PIL import Image, ImageDraw, ImageFont
+
+# --- CẤU HÌNH TRÊN CS50 ---
+duong_dan_day_du = "tri_wallpaper.png"
+
+def tao_hinh_nen_lich():
+    os.makedirs(THU_MUC_LƯU, exist_ok=True)
+    duong_dan_day_du = os.path.join(THU_MUC_LƯU, TEN_FILE)
+
+    # Canvas RGBA - Nền đen nhám
+    W, H = 1170, 2532
+    img = Image.new('RGBA', (W, H), color=(18, 18, 18, 255))
+    draw = ImageDraw.Draw(img)
+
+    # Load Font
+    try:
+        font_thang = ImageFont.truetype("font.ttf", 32)
+        font_dem_nguoc = ImageFont.truetype("font.ttf", 45)
+    except:
+        font_thang = font_dem_nguoc = ImageFont.load_default()
+
+    # Thông số lưới
+    kc_hat = 38; r = 8
+    w_thang = 6 * kc_hat
+    kc_thang_x = 340; kc_thang_y = 350
+    w_tong_grid = (2 * kc_thang_x) + w_thang
+    margin_x = (W - w_tong_grid) // 2
+    margin_y = 850
+
+    # Mốc Tử vi 2026
+    hom_nay = datetime.date(2026, 2, 25)
+    nam_hien_tai = 2026
+    vung_do = [(datetime.date(2026, 4, 17), datetime.date(2026, 5, 16)), (datetime.date(2026, 11, 9), datetime.date(2026, 12, 8))]
+    vung_xanh = [(datetime.date(2026, 3, 19), datetime.date(2026, 4, 16)), (datetime.date(2026, 7, 14), datetime.date(2026, 8, 12))]
+    vung_cam = [(datetime.date(2026, 2, 17), datetime.date(2026, 3, 18))]
+
+    # --- BẢNG MÀU MỚI (VIBRANT + LOW OPACITY) ---
+    COLOR_PAST = (255, 255, 255, 255)       # Trắng sáng (Quá khứ)
+    COLOR_TODAY = (255, 87, 34, 255)        # Cam rực (Hôm nay)
+    COLOR_FUTURE_NORMAL = (44, 44, 46, 255) # Xám tối (Tương lai thường)
+
+    # ĐỘ MỜ CHUNG CHO TƯƠNG LAI (Thử nghiệm mức 70/255)
+    # Mức này giúp màu rực chìm xuống nền đen, đồng bộ sắc độ với chấm xám.
+    DIM_ALPHA = 10
+
+    COLOR_DIM_RED = (255, 59, 48, 25)    # Đỏ tươi + Mờ
+    COLOR_DIM_GREEN = (52, 199, 89, 25)  # Xanh lá tươi + Mờ
+    COLOR_DIM_ORANGE = (255, 149, 0, 25) # Cam tươi + Mờ
+
+    def lay_mau_tuong_lai(ngay_dang_xet):
+        for start, end in vung_do:
+            if start <= ngay_dang_xet <= end: return COLOR_DIM_RED
+        for start, end in vung_xanh:
+            if start <= ngay_dang_xet <= end: return COLOR_DIM_GREEN
+        for start, end in vung_cam:
+            if start <= ngay_dang_xet <= end: return COLOR_DIM_ORANGE
+        return COLOR_FUTURE_NORMAL
+
+    # VẼ LƯỚI
+    for thang in range(1, 13):
+        col_thang = (thang - 1) % 3; row_thang = (thang - 1) // 3
+        toa_do_x_thang = margin_x + col_thang * kc_thang_x
+        toa_do_y_thang = margin_y + row_thang * kc_thang_y
+
+        ten_thang = calendar.month_abbr[thang]
+        bbox_text = draw.textbbox((0, 0), ten_thang, font=font_thang)
+        x_text = toa_do_x_thang + w_thang - (bbox_text[2] - bbox_text[0]) + r
+        draw.text((x_text, toa_do_y_thang - 60), ten_thang, font=font_thang, fill=(142, 142, 147, 255))
+
+        so_ngay_trong_thang = calendar.monthrange(nam_hien_tai, thang)[1]
+        for ngay in range(1, so_ngay_trong_thang + 1):
+            ngay_xet = datetime.date(nam_hien_tai, thang, ngay)
+            row_hat = (ngay - 1) // 7; col_hat = (ngay - 1) % 7
+            x = toa_do_x_thang + col_hat * kc_hat
+            y = toa_do_y_thang + row_hat * kc_hat
+            bbox = [x - r, y - r, x + r, y + r]
+
+            if ngay_xet < hom_nay:
+                draw.ellipse(bbox, fill=COLOR_PAST) # QUÁ KHỨ
+            elif ngay_xet == hom_nay:
+                draw.ellipse([x-r-2, y-r-2, x+r+2, y+r+2], fill=COLOR_TODAY) # HÔM NAY
+            else:
+                draw.ellipse(bbox, fill=lay_mau_tuong_lai(ngay_xet)) # TƯƠNG LAI MỜ
+
+    # VẼ ĐẾM NGƯỢC
+    cuoi_nam = datetime.date(nam_hien_tai, 12, 31)
+    text_dem_nguoc = f"{(cuoi_nam - hom_nay).days}d left"
+    bbox_text = draw.textbbox((0, 0), text_dem_nguoc, font=font_dem_nguoc)
+    draw.text(((W - (bbox_text[2] - bbox_text[0])) // 2, 2250), text_dem_nguoc, font=font_dem_nguoc, fill=COLOR_TODAY)
+
+    img.save(duong_dan_day_du, format="PNG", quality=100)
+    print(f"✅ Ảnh nền (Vibrant Dim) đã lưu tại: {duong_dan_day_du}")
+
+if __name__ == "__main__":
+    tao_hinh_nen_lich()
