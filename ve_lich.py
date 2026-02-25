@@ -7,7 +7,6 @@ from PIL import Image, ImageDraw, ImageFont
 duong_dan_day_du = "tri_wallpaper.png"
 
 def tao_hinh_nen_lich():
-    os.makedirs(THU_MUC_LƯU, exist_ok=True)
     duong_dan_day_du = os.path.join(THU_MUC_LƯU, TEN_FILE)
 
     # Canvas RGBA - Nền đen nhám
