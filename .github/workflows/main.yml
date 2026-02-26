@@ -2,15 +2,15 @@ name: Generate Jarvis Calendar
 
 on:
   schedule:
-    - cron: '1 17 * * *' # Chạy tự động lúc 00:01 sáng giờ VN
-  workflow_dispatch: # Cho phép bấm nút chạy tay
+    - cron: '1 17 * * *' 
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # Cấp quyền cho bot sửa file
+      contents: write 
 
     steps:
       - name: Checkout Code
@@ -24,13 +24,19 @@ jobs:
       - name: Cài đặt thư viện đồ họa Pillow
         run: pip install Pillow
 
-      - name: Chạy Jarvis vẽ lịch
+      - name: Chạy Jarvis vẽ lịch (Bản của tôi)
         run: python ve_lich.py
+        
+      - name: Chạy Jarvis vẽ lịch (Bản của khách)
+        run: python ve_lich_khach.py
+
+      - name: Chạy Jarvis vẽ lịch (Bản của Sally)
+        run: python ve_lich_sally.py
 
       - name: Lưu ảnh mới và đẩy lại lên kho chứa
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add tri_wallpaper.png
+          git add *.png
           git commit -m "Cập nhật Lịch tự động [skip ci]" || echo "Không có thay đổi nào mới để commit"
           git push
