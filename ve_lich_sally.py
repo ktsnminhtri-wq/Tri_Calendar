@@ -8,7 +8,7 @@ def tao_hinh_nen_lich_sally():
 
     # 2. Khởi tạo Canvas nền tối (Deep Blue/Dark Gray)
     W, H = 1170, 2532
-    img = Image.new('RGBA', (W, H), color=(18, 18, 18, 255))
+    img = Image.new('RGBA', (W, H), color=(241, 237, 226, 255))
     draw = ImageDraw.Draw(img)
 
     # 3. Nạp Font
