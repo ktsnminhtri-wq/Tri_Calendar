@@ -41,9 +41,9 @@ def tao_hinh_nen_lich():
     COLOR_PAST = (255, 255, 255, 255)       
     COLOR_TODAY = (255, 87, 34, 255)        
     COLOR_FUTURE_NORMAL = (44, 44, 46, 255) 
-    COLOR_DIM_RED = (255, 59, 48, 25)    
+    COLOR_DIM_RED = (100, 0, 0, 255)    
     COLOR_DIM_GREEN = (52, 199, 89, 25)  
-    COLOR_DIM_ORANGE = (255, 149, 0, 25) 
+    COLOR_DIM_ORANGE = (55, 110, 0, 255) 
 
     def lay_mau_tuong_lai(ngay_dang_xet):
         for start, end in vung_do:
@@ -84,7 +84,7 @@ def tao_hinh_nen_lich():
     cuoi_nam = datetime.date(nam_hien_tai, 12, 31)
     text_dem_nguoc = f"{(cuoi_nam - hom_nay).days}d left"
     bbox_text = draw.textbbox((0, 0), text_dem_nguoc, font=font_dem_nguoc)
-    draw.text(((W - (bbox_text[2] - bbox_text[0])) // 2, 2250), text_dem_nguoc, font=font_dem_nguoc, fill=COLOR_TODAY)
+    draw.text(((W - (bbox_text[2] - bbox_text[0])) // 2, 2150), text_dem_nguoc, font=font_dem_nguoc, fill=COLOR_TODAY)
 
     # 9. Xuất file
     img.save(duong_dan_day_du, format="PNG", quality=100)
