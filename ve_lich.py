@@ -42,8 +42,8 @@ def tao_hinh_nen_lich():
     COLOR_TODAY = (255, 87, 34, 255)        
     COLOR_FUTURE_NORMAL = (44, 44, 46, 255) 
     COLOR_DIM_RED = (100, 0, 0, 255)    
-    COLOR_DIM_GREEN = (52, 199, 89, 25)  
-    COLOR_DIM_ORANGE = (55, 110, 0, 255) 
+    COLOR_DIM_GREEN = (25, 105, 0, 255)  
+    COLOR_DIM_ORANGE = (110, 110, 0, 255) 
 
     def lay_mau_tuong_lai(ngay_dang_xet):
         for start, end in vung_do:
