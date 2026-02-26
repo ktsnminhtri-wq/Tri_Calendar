@@ -26,9 +26,6 @@ jobs:
 
       - name: Chạy Jarvis vẽ lịch (Bản của tôi)
         run: python ve_lich.py
-        
-      - name: Chạy Jarvis vẽ lịch (Bản của khách)
-        run: python ve_lich_khach.py
 
       - name: Chạy Jarvis vẽ lịch (Bản của Sally)
         run: python ve_lich_sally.py
