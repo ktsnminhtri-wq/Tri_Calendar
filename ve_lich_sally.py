@@ -33,9 +33,9 @@ def tao_hinh_nen_lich_sally():
     nam_hien_tai = 2026
 
     # 6. Bảng màu tuỳ biến cho Sally 
-    COLOR_PAST = (255, 255, 255, 255)       
+    COLOR_PAST = (44, 44, 46, 255)       
     COLOR_TODAY = (255, 110, 150, 255)        # Điểm nhấn: Màu Hồng Cam (Rose/Pastel Pink)
-    COLOR_FUTURE_NORMAL = (44, 44, 46, 255) 
+    COLOR_FUTURE_NORMAL = (255, 255, 255, 255) 
 
     # 7. Vẽ Lưới 365 ngày
     for thang in range(1, 13):
