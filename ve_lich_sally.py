@@ -36,7 +36,7 @@ def tao_hinh_nen_lich_sally():
     # 6. Bảng màu tuỳ biến cho Sally 
     COLOR_PAST = (255, 255, 255, 255)       
     COLOR_TODAY = (255, 110, 150, 255)        # Hồng Cam (Rose Gold)
-    COLOR_FUTURE_NORMAL = (44, 44, 46, 255) 
+    COLOR_FUTURE_NORMAL = (100, 100, 105, 255) 
     COLOR_WEEKDAY = (100, 100, 105, 255)      # Xám nhạt cho tiêu đề Thứ
 
     # Dãy ký tự viết tắt của các Thứ (Bắt đầu từ Thứ 2)
@@ -58,7 +58,7 @@ def tao_hinh_nen_lich_sally():
         for i, thu in enumerate(weekdays):
             bbox_thu = draw.textbbox((0, 0), thu, font=font_thu)
             x_thu = toa_do_x_thang + i * kc_hat - (bbox_thu[2] - bbox_thu[0])/2
-            draw.text((x_thu, toa_do_y_thang - 20), thu, font=font_thu, fill=COLOR_WEEKDAY)
+            draw.text((x_thu, toa_do_y_thang - 10), thu, font=font_thu, fill=COLOR_WEEKDAY)
 
         # [MỚI] Tìm xem ngày mùng 1 của tháng này là Thứ mấy (0=T2, 6=CN)
         first_weekday, so_ngay_trong_thang = calendar.monthrange(nam_hien_tai, thang)
