@@ -58,7 +58,7 @@ def tao_hinh_nen_lich_sally():
         for i, thu in enumerate(weekdays):
             bbox_thu = draw.textbbox((0, 0), thu, font=font_thu)
             x_thu = toa_do_x_thang + i * kc_hat - (bbox_thu[2] - bbox_thu[0])/2
-            draw.text((x_thu, toa_do_y_thang - 10), thu, font=font_thu, fill=COLOR_WEEKDAY)
+            draw.text((x_thu, toa_do_y_thang - 35), thu, font=font_thu, fill=COLOR_WEEKDAY)
 
         # [MỚI] Tìm xem ngày mùng 1 của tháng này là Thứ mấy (0=T2, 6=CN)
         first_weekday, so_ngay_trong_thang = calendar.monthrange(nam_hien_tai, thang)
