@@ -52,7 +52,7 @@ def tao_hinh_nen_lich_sally():
         ten_thang = calendar.month_abbr[thang]
         bbox_text = draw.textbbox((0, 0), ten_thang, font=font_thang)
         x_text = toa_do_x_thang + w_thang - (bbox_text[2] - bbox_text[0]) + r
-        draw.text((x_text, toa_do_y_thang - 70), ten_thang, font=font_thang, fill=(100, 100, 105, 255)
+        draw.text((x_text, toa_do_y_thang - 70), ten_thang, font=font_thang, fill=(100, 100, 105, 255))
 
         # [MỚI] Vẽ hàng tiêu đề Thứ (M T W T F S S) siêu nhỏ trên đầu mỗi tháng
         for i, thu in enumerate(weekdays):
