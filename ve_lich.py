@@ -65,10 +65,16 @@ def tao_hinh_nen_lich():
         x_text = toa_do_x_thang + w_thang - (bbox_text[2] - bbox_text[0]) + r
         draw.text((x_text, toa_do_y_thang - 60), ten_thang, font=font_thang, fill=(142, 142, 147, 255))
 
-        so_ngay_trong_thang = calendar.monthrange(nam_hien_tai, thang)[1]
+# Lấy thêm thông tin mùng 1 là Thứ mấy (first_weekday)
+        first_weekday, so_ngay_trong_thang = calendar.monthrange(nam_hien_tai, thang)
+        
         for ngay in range(1, so_ngay_trong_thang + 1):
             ngay_xet = datetime.date(nam_hien_tai, thang, ngay)
-            row_hat = (ngay - 1) // 7; col_hat = (ngay - 1) % 7
+            
+            # Tính toán lại tọa độ lưới
+            vi_tri_tren_luoi = first_weekday + (ngay - 1)
+            row_hat = vi_tri_tren_luoi // 7
+            col_hat = vi_tri_tren_luoi % 7
             x = toa_do_x_thang + col_hat * kc_hat
             y = toa_do_y_thang + row_hat * kc_hat
             bbox = [x - r, y - r, x + r, y + r]
